@@ -18,11 +18,23 @@ function dataMovies() {
         .catch(error => console.error('Error en la petición:', error));
 }
 
-// Función para convertir el promedio de votos en estrellas
+// Función para convertir la puntuación en estrellas
 function renderStars(voteAverage) {
     const maxStars = 5;
-    const rating = Math.round(voteAverage / 2); // convertir a una escala de 5 estrellas porque originalmente está hasta 10
-    return '★'.repeat(rating) + '☆'.repeat(maxStars - rating);
+    const rating = Math.round(voteAverage / 2); // Convertir la puntuación de 10 a 5 estrellas
+    let starsHTML = '';
+
+    // Agregar las estrellas llenas
+    for (let i = 1; i <= rating; i++) {
+        starsHTML += '<span class="fa fa-star checked"></span>';
+    }
+
+    // Agregar estrellas vacías
+    for (let i = 0; i < (maxStars - rating); i++) {
+        starsHTML += '<span class="fa fa-star"></span>';
+    }
+
+    return starsHTML;
 }
 
 console.log(renderStars(10));
@@ -53,8 +65,10 @@ function buscarPeliculas() {
     filteredMovies.forEach(pelicula => { // Crea un li para cada película que coincida con los criterios de búsqueda
         const li = document.createElement('li'); // La constante li crea el elemento li
         li.innerHTML = `
-            <h3 class=movie-title>${pelicula.title}</h3>
+            <div class="movie-header">
+            <h3 class=movie-title>${pelicula.title}</h3> 
             <p class="stars">${renderStars(pelicula.vote_average)}</p> 
+            </div>
             <p class=movie-tagline><em>${pelicula.tagline}</em></p>
         `; // La información deseada se agrega al li
         moviesList.appendChild(li); // Se agrega el li al campo de moviesList

@@ -19,34 +19,63 @@ main {
     min-height: calc(100vh - 100px);
   }
 
-.checked{
-    color: orange;
-}
-
 .offcanvas-top{
     height: fit-content;
 }
 
 /*Estilos de los resultados de busqueda*/
 li {
-    padding: 1rem;
+    display: block;
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
     width: 80%;
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 1rem;
     border: solid rgba(255, 255, 255, 0.521) 0.1rem;
-    border-radius: 1rem;
+    border-radius: 3rem;
     box-shadow: 1rem 1rem;
 }
+li:hover {
+    background-color: rgba(147, 211, 181, 0.377);
+}
 
-.stars {
-    color: gold;
-    text-align: right;
-    margin: auto 1rem auto auto;
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .movie-title {
-    color: white;;
+    color: white;
+    margin: 0;
+    flex: 1;
 }
 
 .movie-tagline {
     color: rgba(255, 255, 255, 0.671);
+    margin: 0;
+    text-align: left;
+    
+}
+
+.stars, .fa-star {
+    display: flex;
+    align-items: center;
+    background-color: aliceblue;
+    border-radius: 3rem;
+    padding: 0.4rem;
+    justify-content: flex-end;
+    transform: scale(1.1);
+}
+.star {
+    margin-top: 1rem;
+}
+
+.fa-star {
+    color: lightgray; /* Color gris claro para las estrellas vacías */
+}
+
+.checked{
+    color: gold;
 }
