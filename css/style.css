@@ -34,9 +34,11 @@ li {
     border: solid rgba(255, 255, 255, 0.521) 0.1rem;
     border-radius: 3rem;
     box-shadow: 1rem 1rem;
+    transition: transform 1s;
 }
 li:hover {
-    background-color: rgba(147, 211, 181, 0.377);
+    background-color: rgba(172, 154, 154, 0.103);
+    transform: scale(1.05);
 }
 
 .movie-header {
@@ -78,4 +80,32 @@ li:hover {
 
 .checked{
     color: gold;
+}
+
+#btn-info {
+    background-color: rgba(255, 0, 0, 0.63);
+    margin-top: 1rem;
+    border-color: rgb(90, 6, 6);
+    border-radius: 3rem;
+    display: flex;
+}
+
+.offcanvas-title {
+    text-shadow: 1px 1px 2px pink;
+}
+
+.offc-title {
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 3rem;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.993);
+    max-width: 30%;
+}
+
+
+.dropdown {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 2rem 1rem 1rem;
 }

@@ -61,17 +61,55 @@ function buscarPeliculas() {
 
     console.log('Películas filtradas:', filteredMovies);
 
-    // Mostrar las películas filtradas
-    filteredMovies.forEach(pelicula => { // Crea un li para cada película que coincida con los criterios de búsqueda
-        const li = document.createElement('li'); // La constante li crea el elemento li
+    filteredMovies.forEach((pelicula, index) => { // El index se usará para IDs únicos
+        const li = document.createElement('li'); 
+    
+        // Obtener los géneros como una lista de nombres
+        const generos = pelicula.genres.map(genero => genero.name).join(', '); 
+        const anioLanzamiento = pelicula.release_date.substring(0, 4); 
+    
         li.innerHTML = `
             <div class="movie-header">
-            <h3 class=movie-title>${pelicula.title}</h3> 
-            <p class="stars">${renderStars(pelicula.vote_average)}</p> 
+                <h3 class="movie-title">${pelicula.title}</h3> 
+                <p class="stars">${renderStars(pelicula.vote_average)}</p> 
             </div>
-            <p class=movie-tagline><em>${pelicula.tagline}</em></p>
-        `; // La información deseada se agrega al li
-        moviesList.appendChild(li); // Se agrega el li al campo de moviesList
+            <p class="movie-tagline"><em>${pelicula.tagline}</em></p>
+            
+            <button class="btn btn-primary" id="btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop-${index}" aria-controls="offcanvasTop-${index}">
+                More info
+            </button>
+        `;
+    
+        moviesList.appendChild(li);
+    
+        // Crear el offcanvas fuera del `li` y añadirlo al body
+        const offcanvasDiv = document.createElement('div');
+        offcanvasDiv.innerHTML = `
+            <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop-${index}" aria-labelledby="offcanvasTopLabel-${index}">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasTopLabel-${index}">Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <h4 class="offc-title">${pelicula.title.toUpperCase()}</h4>
+                    <p>${pelicula.overview}</p>
+                    <p><strong>Genres:</strong> ${generos}</p>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </button>
+                    <ul class="dropdown-menu">
+                        <p class="dropdown-item">Year: ${anioLanzamiento}</p>
+                        <p class="dropdown-item">Runtime: ${pelicula.runtime} mins</p>
+                        <p class="dropdown-item">Budget: $${pelicula.budget}</p>
+                        <p class="dropdown-item">Revenue: $${pelicula.revenue}</p>
+                    </ul>
+                </div>
+            </div>
+        `;
+    
+        document.body.appendChild(offcanvasDiv); // Añadir el offcanvas al body, fuera del contenedor de la película
     });
 
     // Si no hay coincidencias, mostrar un mensaje
