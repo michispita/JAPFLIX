@@ -13,7 +13,7 @@ function dataMovies() {
         })
         .then(data => {
             moviesData = data;  // Guardar la información en la variable
-            console.log('Películas cargadas pero no mostradas:', moviesData);
+            console.log('Datos de películas cargados:', moviesData); // Verificar que los datos se cargan correctamente
         })
         .catch(error => console.error('Error en la petición:', error));
 }
@@ -24,6 +24,8 @@ function renderStars(voteAverage) {
     const rating = Math.round(voteAverage / 2); // convertir a una escala de 5 estrellas porque originalmente está hasta 10
     return '★'.repeat(rating) + '☆'.repeat(maxStars - rating);
 }
+
+console.log(renderStars(10));
 
 // Función para buscar y mostrar las películas
 function buscarPeliculas() {
@@ -40,18 +42,20 @@ function buscarPeliculas() {
     // Filtrar las películas que coincidan con el término de búsqueda
     const filteredMovies = moviesData.filter(pelicula =>  // Filtra en la constante donde está la info
         pelicula.title.toLowerCase().includes(searchTerm) ||  // Pasa el título a minúsculas y lo compara con lo ingresado
-        pelicula.genres.some(genero => genero.toLowerCase().includes(searchTerm)) || // Pasa el género a minúsculas y lo compara con lo ingresado
+        pelicula.genres.some(genero => genero.name.toLowerCase().includes(searchTerm)) || // Pasa el género a minúsculas y lo compara con lo ingresado
         (pelicula.tagline && pelicula.tagline.toLowerCase().includes(searchTerm)) || // Pasa la tagline a minúsculas y lo compara con lo ingresado
         (pelicula.overview && pelicula.overview.toLowerCase().includes(searchTerm)) // Pasa el overview a minúsculas y lo compara con lo ingresado
     );
+
+    console.log('Películas filtradas:', filteredMovies);
 
     // Mostrar las películas filtradas
     filteredMovies.forEach(pelicula => { // Crea un li para cada película que coincida con los criterios de búsqueda
         const li = document.createElement('li'); // La constante li crea el elemento li
         li.innerHTML = `
-            <h3>${pelicula.title}</h3>
-            <p><em>${pelicula.tagline}</em></p>
+            <h3 class=movie-title>${pelicula.title}</h3>
             <p class="stars">${renderStars(pelicula.vote_average)}</p> 
+            <p class=movie-tagline><em>${pelicula.tagline}</em></p>
         `; // La información deseada se agrega al li
         moviesList.appendChild(li); // Se agrega el li al campo de moviesList
     });

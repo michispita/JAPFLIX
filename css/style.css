@@ -27,6 +27,26 @@ main {
     height: fit-content;
 }
 
+/*Estilos de los resultados de busqueda*/
+li {
+    padding: 1rem;
+    width: 80%;
+    margin: 1rem auto 1rem auto;
+    border: solid rgba(255, 255, 255, 0.521) 0.1rem;
+    border-radius: 1rem;
+    box-shadow: 1rem 1rem;
+}
+
 .stars {
     color: gold;
+    text-align: right;
+    margin: auto 1rem auto auto;
+}
+
+.movie-title {
+    color: white;;
+}
+
+.movie-tagline {
+    color: rgba(255, 255, 255, 0.671);
 }
